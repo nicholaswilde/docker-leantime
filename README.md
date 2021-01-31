@@ -1,4 +1,4 @@
-# Docker leantime
+# Docker Leantime
 [![Docker Image Version (latest by date)](https://img.shields.io/docker/v/nicholaswilde/leantime)](https://hub.docker.com/r/nicholaswilde/leantime)
 [![Docker Pulls](https://img.shields.io/docker/pulls/nicholaswilde/leantime)](https://hub.docker.com/r/nicholaswilde/leantime)
 [![GitHub](https://img.shields.io/github/license/nicholaswilde/docker-leantime)](./LICENSE)
@@ -6,7 +6,7 @@
 [![lint](https://github.com/nicholaswilde/docker-leantime/workflows/lint/badge.svg?branch=main)](https://github.com/nicholaswilde/docker-leantime/actions?query=workflow%3Alint)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-A leantime repo for Docker images.
+A multi-architecture image of [Leantime](https://leantime.io/)
 
 ## Requirements
 - [buildx](https://docs.docker.com/engine/reference/commandline/buildx/)
