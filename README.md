@@ -1,53 +1,70 @@
-# Docker Template
-[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/nicholaswilde/template)](https://hub.docker.com/r/nicholaswilde/template)
-[![Docker Pulls](https://img.shields.io/docker/pulls/nicholaswilde/template)](https://hub.docker.com/r/nicholaswilde/template)
-[![GitHub](https://img.shields.io/github/license/nicholaswilde/docker-template)](./LICENSE)
-[![ci](https://github.com/nicholaswilde/docker-template/workflows/ci/badge.svg)](https://github.com/nicholaswilde/docker-template/actions?query=workflow%3Aci)
-[![lint](https://github.com/nicholaswilde/docker-template/workflows/lint/badge.svg?branch=main)](https://github.com/nicholaswilde/docker-template/actions?query=workflow%3Alint)
+# Docker leantime
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/nicholaswilde/leantime)](https://hub.docker.com/r/nicholaswilde/leantime)
+[![Docker Pulls](https://img.shields.io/docker/pulls/nicholaswilde/leantime)](https://hub.docker.com/r/nicholaswilde/leantime)
+[![GitHub](https://img.shields.io/github/license/nicholaswilde/docker-leantime)](./LICENSE)
+[![ci](https://github.com/nicholaswilde/docker-leantime/workflows/ci/badge.svg)](https://github.com/nicholaswilde/docker-leantime/actions?query=workflow%3Aci)
+[![lint](https://github.com/nicholaswilde/docker-leantime/workflows/lint/badge.svg?branch=main)](https://github.com/nicholaswilde/docker-leantime/actions?query=workflow%3Alint)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-A template repo for Docker images.
+A leantime repo for Docker images.
 
 ## Requirements
 - [buildx](https://docs.docker.com/engine/reference/commandline/buildx/)
 
 ## Usage
+
 ### docker-compose
-```
+
+```yaml
 ---
-version: "2.1"
+version: '3.3'
 services:
-  template:
-    image: nicholaswilde/template
-    container_name: template
-    environment:
-      - TZ=America/Los_Angeles #optional
-      - PUID=1000   #optional
-      - PGID=1000   #optional
-    ports:
-      - 3000:3000
-    restart: unless-stopped
+  db:
+    image: mysql:5.7
+    container_name: mysql_leantime
     volumes:
-      - app:/app
-      - config:/config
-      - defaults:/defaults
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: '321.qwerty'
+      MYSQL_DATABASE: 'leantime'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: '321.qwerty'
+    ports:
+      - "3306:3306"
+    command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
+  web:
+    image: nicholaswilde/leantime:2.1.5-ls1
+    container_name: leantime
+    environment:
+      TZ: 'America/Chicago'
+      LEAN_DB_HOST: 'mysql_leantime'
+      LEAN_DB_USER: 'admin'
+      LEAN_DB_PASSWORD: '321.qwerty'
+      LEAN_DB_DATABASE: 'leantime'
+    ports:
+      - "9000:9000"
+      - "80:80"
+    depends_on:
+      - db
 volumes:
-  app:
-  config:
-  defaults:
-```
-### docker cli
-```bash
-$ docker run -d \
-  --name=template \
-  -e TZ=America/Los_Angeles `# optional` \
-  -e PUID=1000  `# optional` \
-  -e PGID=1000   `# optional` \
-  -p 3000:3000 \
-  --restart unless-stopped \
-  nicholaswilde/template
+  db_data: {}
 ```
 
+### docker cli
+
+```bash
+$ docker run -d \
+  --name=leantime \
+  -e TZ=America/Los_Angeles `# optional` \
+  -e LEAN_DB_HOST='mysql_leantime' \
+  -e LEAN_DB_USER='admin' \
+  -e LEAN_DB_PASSWORD='321.qwerty' \
+  -e LEAN_DB_DATABASE='leantime' \
+  -p 3000:3000 \
+  --restart unless-stopped \
+  nicholaswilde/leantime
+```
 ## Build
 
 Check that you can build the following:
