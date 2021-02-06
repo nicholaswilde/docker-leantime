@@ -9,7 +9,7 @@ SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    curl && \
+    curl=7.74.0-r0 && \
   echo "**** download leantime ****" && \
   curl -LJO "https://github.com/Leantime/leantime/releases/download/v${VERSION}/Leantime-V${VERSION}.tar.gz" && \
   echo "$CHECKSUM  Leantime-v${VERSION}.tar.gz" | sha256sum -c && \
