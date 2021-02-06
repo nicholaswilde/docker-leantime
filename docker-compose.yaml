@@ -16,7 +16,7 @@ services:
       - "3306:3306"
     command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
   web:
-    image: nicholaswilde/leantime:2.1.5-ls1
+    image: nicholaswilde/leantime
     container_name: leantime
     environment:
       TZ: 'America/Chicago'

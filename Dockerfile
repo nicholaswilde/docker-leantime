@@ -1,6 +1,6 @@
 FROM php:7.2-fpm-alpine
-ARG VERSION=2.1.6
-ARG CHECKSUM=e1c258ca43f620571bf7d8c9b7e6705bc8c2b67075f321d584a8b8523b55b4aa
+ARG VERSION=2.1.7
+ARG CHECKSUM=3a5e0cb794cf2dc6c97b32ffad4ccdfbb84d3e987e910c5d3fef686e7ac2463f
 ARG TZ
 ENV TZ $(TZ)
 WORKDIR /var/www/html
@@ -45,7 +45,7 @@ RUN \
     bcmath \
     gd && \
   echo "**** download leantime ****" && \
-  curl -LJO "https://github.com/Leantime/leantime/releases/download/v${VERSION}/Leantime-v${VERSION}.tar.gz" && \
+  curl -LJO "https://github.com/Leantime/leantime/releases/download/v${VERSION}/Leantime-V${VERSION}.tar.gz" && \
   echo "$CHECKSUM  Leantime-v${VERSION}.tar.gz" | sha256sum -c && \
   tar -zxvf "Leantime-v${VERSION}.tar.gz" --strip-components 1 && \
   rm "Leantime-v${VERSION}.tar.gz" && \
