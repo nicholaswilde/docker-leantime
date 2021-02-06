@@ -24,7 +24,7 @@ on:
         required: true
       ls:
         description: 'ls'
-        default: 'ls3'
+        default: 'ls4'
         required: true
 
 jobs:

@@ -30,11 +30,11 @@ lint:	Dockerfile
 
 ## load   	: Load the release image
 load: Dockerfile
-	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION)-ls$(LS) --build-arg VERSION=$(VERSION) --build-arg BUILD_DATE=$(BUILD_DATE) -f Dockerfile --load .
+	docker buildx build -t $(NS)/$(IMAGE_NAME):$(VERSION)-ls$(LS) --build-arg VERSION=$(VERSION) --build-arg CHECKSUM=$(CHECKSUM) --build-arg BUILD_DATE=$(BUILD_DATE) -f Dockerfile --load .
 
 ## load-latest  	: Load the latest image
 load-latest: Dockerfile
-	docker buildx build -t $(NS)/$(IMAGE_NAME):latest -f Dockerfile --load .
+	docker buildx build -t $(NS)/$(IMAGE_NAME):latest --build-arg VERSION=$(VERSION) --build-arg CHECKSUM=$(CHECKSUM) --build-arg BUILD_DATE=$(BUILD_DATE) -f Dockerfile --load .
 
 ## monitor	: Monitor the image with snyk
 monitor:
@@ -69,7 +69,7 @@ rund:
 	docker run -d --rm --name $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) $(PORTS) $(ENV) $(NS)/$(IMAGE_NAME):$(VERSION)-ls$(LS)
 
 shell:
-	docker run --rm -it $(PORTS) $(ENV) $(NS)/$(IMAGE_NAME):$(VERSION)-ls$(LS) /bin/bash
+	docker run --rm -it $(PORTS) $(ENV) $(NS)/$(IMAGE_NAME):$(VERSION)-ls$(LS) /bin/ash
 
 ## stop   	: Stop the Docker container
 stop:
