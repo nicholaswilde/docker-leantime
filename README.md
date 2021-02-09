@@ -14,44 +14,6 @@ A multi-architecture image of [Leantime](https://leantime.io/)
 
 ## Usage
 
-### docker-compose
-
-```yaml
----
-version: '3.3'
-services:
-  db:
-    image: mysql:5.7
-    container_name: mysql_leantime
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: '321.qwerty'
-      MYSQL_DATABASE: 'leantime'
-      MYSQL_USER: 'admin'
-      MYSQL_PASSWORD: '321.qwerty'
-    ports:
-      - "3306:3306"
-    command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
-  web:
-    image: nicholaswilde/leantime:2.1.5-ls1
-    container_name: leantime
-    environment:
-      TZ: 'America/Chicago'
-      LEAN_DB_HOST: 'mysql_leantime'
-      LEAN_DB_USER: 'admin'
-      LEAN_DB_PASSWORD: '321.qwerty'
-      LEAN_DB_DATABASE: 'leantime'
-    ports:
-      - "9000:9000"
-      - "80:80"
-    depends_on:
-      - db
-volumes:
-  db_data: {}
-```
-
 ### docker cli
 
 ```bash
