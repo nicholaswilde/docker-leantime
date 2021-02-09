@@ -8,8 +8,9 @@
 
 A multi-architecture image of [Leantime](https://leantime.io/)
 
-## Requirements
-- [buildx](https://docs.docker.com/engine/reference/commandline/buildx/)
+## Dependencies
+
+* mysql
 
 ## Usage
 
@@ -65,21 +66,18 @@ $ docker run -d \
   --restart unless-stopped \
   nicholaswilde/leantime
 ```
-## Build
 
-Check that you can build the following:
-```bash
-$ docker buildx ls
-NAME/NODE    DRIVER/ENDPOINT             STATUS  PLATFORMS
-mybuilder *  docker-container
-  mybuilder0 unix:///var/run/docker.sock running linux/amd64, linux/arm64, linux/arm/v7
-```
+### docker-compose
 
-If you are having trouble building arm images on a x86 machine, see [this blog post](https://www.docker.com/blog/getting-started-with-docker-for-arm-on-linux/).
+See [docker-compose.yaml](./docker-compose.yaml).
 
-```
-$ make build
-```
+## Development
+
+See [Wiki](https://github.com/nicholaswilde/docker-template/wiki/Development).
+
+## Troubleshooting
+
+See [Wiki](https://github.com/nicholaswilde/docker-template/wiki/Troubleshooting).
 
 ## Pre-commit hook
 
