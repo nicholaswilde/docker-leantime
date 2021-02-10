@@ -89,7 +89,7 @@ COPY ./config/app.conf  /etc/apache2/conf.d/app.conf
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    mysql-client=10.4.15-r0 \
+    mysql-client=10.4.17-r1 \
     freetype=2.10.4-r0 \
     libpng=1.6.37-r1 \
     libjpeg-turbo=2.0.5-r0 \
@@ -105,7 +105,7 @@ RUN \
     apache2=2.4.46-r1 \
     apache2-ctl=2.4.46-r1 \
     apache2-proxy=2.4.46-r1 \
-    tzdata=2020f-r0 && \
+    tzdata=2021a-r0 && \
   echo "**** cleanup ****" && \
   rm -rf /tmp/* && \
   chown www-data -R . && \
@@ -113,7 +113,11 @@ RUN \
   echo "**** configure supervisord ****" && \
   sed -i '/LoadModule rewrite_module/s/^#//g' /etc/apache2/httpd.conf && \
   sed -i 's#AllowOverride [Nn]one#AllowOverride All#' /etc/apache2/httpd.conf && \
-  sed -i '$iLoadModule proxy_module modules/mod_proxy.so' /etc/apache2/httpd.conf
+  sed -i '$iLoadModule proxy_module modules/mod_proxy.so' /etc/apache2/httpd.conf && \
+  mkdir -p "/sessions" && \
+  chown www-data:www-data /sessions && \
+  chmod 0777 /sessions
 
+VOLUME [ "/sessions" ]
 ENTRYPOINT ["/entrypoint.sh"]
 EXPOSE 80 9000

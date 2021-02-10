@@ -29,5 +29,8 @@ services:
       - "80:80"
     depends_on:
       - db
+    volumes:
+      - sessions:/sessions
 volumes:
-  db_data: {}
+  db_data:
+  sessions:
