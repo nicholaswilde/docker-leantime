@@ -25,6 +25,7 @@ $ docker run -d \
   -e LEAN_DB_PASSWORD='321.qwerty' \
   -e LEAN_DB_DATABASE='leantime' \
   -p 80:80 \
+  -p 9000:9000 \
   --restart unless-stopped \
   nicholaswilde/leantime
 ```
