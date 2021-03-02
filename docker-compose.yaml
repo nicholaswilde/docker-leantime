@@ -2,7 +2,7 @@
 version: '3.3'
 services:
   db:
-    image: mysql:5.7
+    image: ghcr.io/linuxserver/mariadb
     container_name: mysql_leantime
     volumes:
       - db_data:/var/lib/mysql
@@ -14,7 +14,6 @@ services:
       MYSQL_PASSWORD: '321.qwerty'
     ports:
       - "3306:3306"
-    command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
   web:
     image: nicholaswilde/leantime
     container_name: leantime
