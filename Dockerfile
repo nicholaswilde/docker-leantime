@@ -1,15 +1,15 @@
 # Base image version
 FROM php:7.2-fpm-alpine as php
 
-FROM alpine:3.13.1 as dl
-ARG VERSION=2.1.7
-ARG CHECKSUM=3a5e0cb794cf2dc6c97b32ffad4ccdfbb84d3e987e910c5d3fef686e7ac2463f
+FROM alpine:3.13.5 as dl
+ARG VERSION
+ARG CHECKSUM
 WORKDIR /app
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    curl=7.74.0-r0 && \
+    curl=7.76.1-r0 && \
   echo "**** download leantime ****" && \
   curl -LJO "https://github.com/Leantime/leantime/releases/download/v${VERSION}/Leantime-V${VERSION}.tar.gz" && \
   echo "$CHECKSUM  Leantime-v${VERSION}.tar.gz" | sha256sum -c && \
@@ -38,7 +38,7 @@ RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
     libpng-dev=1.6.37-r1 \
-    libjpeg-turbo-dev=2.0.5-r0 && \
+    libjpeg-turbo-dev=2.1.0-r0 && \
   docker-php-ext-configure gd \
     --with-gd \
     --with-jpeg-dir=/usr/include/ \
@@ -89,13 +89,13 @@ COPY ./config/app.conf  /etc/apache2/conf.d/app.conf
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    mysql-client=10.4.17-r1 \
+    mysql-client=10.4.18-r0 \
     freetype=2.10.4-r0 \
     libpng=1.6.37-r1 \
-    libjpeg-turbo=2.0.5-r0 \
+    libjpeg-turbo=2.1.0-r0 \
     freetype-dev=2.10.4-r0 \
     libpng-dev=1.6.37-r1 \
-    libjpeg-turbo-dev=2.0.5-r0 \
+    libjpeg-turbo-dev=2.1.0-r0 \
     icu-libs=67.1-r0 \
     jpegoptim=1.4.6-r0 \
     optipng=0.7.7-r0 \
